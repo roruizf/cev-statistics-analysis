@@ -56,7 +56,7 @@ class CEV:
         df['CEE'] = df['CEE'].astype(my_categories)
 
         print(
-            f"A dia de hoy, {df.shape[0]} viviendas han participado de este proceso, las cuales pertenecen a {df['Proyecto'].unique().shape[0]} proyectos diferentes.")
+            f"A dia de hoy, {df.shape[0]} viviendas han participado en este proceso, las cuales pertenecen a {df['Proyecto'].unique().shape[0]} proyectos diferentes.")
         print(
             f"  - Número de viviendas PRE-calificadas: {df[df['Status']=='Pre-calificación'].shape[0]} viviendas")
         print(
