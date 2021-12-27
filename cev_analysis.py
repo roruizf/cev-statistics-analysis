@@ -65,6 +65,48 @@ class CEV:
             f"Las viviendas se encuentran repartidas en {df['Comuna'].unique().shape[0]} comunas y {df['Región'].unique().shape[0]} regiones del pais.")
         return df
 
+    def consultor_dataframe(self, file):
+        # Creating dataframe
+        df = pd.read_csv(file, encoding='utf-8')
+
+        # Creating and applying categories for Llamado
+        llamado_category = pd.CategoricalDtype(categories=['1',
+                                                           '2',
+                                                           '3',
+                                                           '4',
+                                                           '5',
+                                                           '6',
+                                                           '7',
+                                                           '8',
+                                                           '9',
+                                                           '10 - 1s 2018',
+                                                           '10 - 2s 2018',
+                                                           '11 - 1s 2019',
+                                                           '11 - 2S 2019',
+                                                           '12 - 1S 2020',
+                                                           '12 - 2S 2020'], ordered=True)
+        df['Llamado'] = df['Llamado'].astype(llamado_category)
+
+        # Creating and applying categories for Profesión
+        df['Profesión'] = df['Profesión'].astype("category")
+
+        # Creating and applying categories for regions
+        region_trans = {"O´Higgins": "O'Higgins"}
+        df['Región'] = df['Región'].replace(region_trans)
+        region_category = pd.CategoricalDtype(categories=['Arica y Parinacota', 'Tarapacá', 'Antofagasta', 'Atacama', 'Coquimbo', 'Valparaíso', 'Metropolitana',
+                                                          "O'Higgins", 'Maule', 'Ñuble', 'Biobío', 'Araucanía', 'Los Ríos', 'Los Lagos', 'Aysén', 'Magallanes'], ordered=True)
+        df['Región'] = df['Región'].astype(region_category)
+
+        # print(
+        #     f"A dia de hoy, {df.shape[0]} viviendas han participado en este proceso, las cuales pertenecen a {df['Proyecto'].unique().shape[0]} proyectos diferentes.")
+        # print(
+        #     f"  - Número de viviendas PRE-calificadas: {df[df['Status']=='Pre-calificación'].shape[0]} viviendas")
+        # print(
+        #     f"  - Número de viviendas Calificadas: {df[df['Status']=='Calificación'].shape[0]} viviendas")
+        # print(
+        #     f"Las viviendas se encuentran repartidas en {df['Comuna'].unique().shape[0]} comunas y {df['Región'].unique().shape[0]} regiones del pais.")
+        return df
+
 
 # ahorro_energetico = {"A+": ">85%",
 #                     "A": ">70% & <=85%",
